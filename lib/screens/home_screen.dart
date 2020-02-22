@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:whatsapp_clone_flutter/screens/calls_view.dart';
 import 'package:whatsapp_clone_flutter/screens/chat_view.dart';
+import 'package:whatsapp_clone_flutter/screens/contacts_screen.dart';
 import 'package:whatsapp_clone_flutter/widgets/tab_item.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -48,13 +50,16 @@ class HomeScreen extends StatelessWidget {
           Container(),
           ChatView(),
           Container(),
-          Container(),
+          CallsView(),
         ]),
         floatingActionButton: FloatingActionButton(
           elevation: 4,
           child: Icon(Icons.chat),
           backgroundColor: Color.fromRGBO(4, 217, 57, 1),
-          onPressed: () => {},
+          onPressed: () {
+            Navigator.of(context).push(
+                MaterialPageRoute(builder: (context) => ContactsScreen()));
+          },
         ),
       ),
     );

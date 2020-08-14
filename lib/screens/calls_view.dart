@@ -17,7 +17,7 @@ class CallsView extends StatelessWidget {
           children: [
             TextSpan(
                 text:
-                    'Para começar a fazer chamadas para contatos que possuem Whatsapp, toque em'),
+                    'Para começar a fazer chamadas com seus contatos que usam o Whatsapp, toque em'),
             WidgetSpan(
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 6),
@@ -27,7 +27,7 @@ class CallsView extends StatelessWidget {
                 ),
               ),
             ),
-            TextSpan(text: 'na parte inferiorda tela.')
+            TextSpan(text: 'no final da tela.')
           ],
         ),
       ),

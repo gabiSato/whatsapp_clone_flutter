@@ -17,6 +17,7 @@ class ChatItem extends StatelessWidget {
     return ListTile(
       leading: CircleAvatar(
         backgroundImage: ExactAssetImage(imagePath),
+        radius: 28,
       ),
       title: Text(
         contactName,

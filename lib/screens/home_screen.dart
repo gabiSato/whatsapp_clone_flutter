@@ -1,10 +1,29 @@
 import 'package:flutter/material.dart';
-import 'package:whatsapp_clone_flutter/screens/calls_view.dart';
-import 'package:whatsapp_clone_flutter/screens/chat_view.dart';
-import 'package:whatsapp_clone_flutter/screens/contacts_screen.dart';
-import 'package:whatsapp_clone_flutter/widgets/tab_item.dart';
 
-class HomeScreen extends StatelessWidget {
+import '../widgets/tab_item.dart';
+import './contacts_screen.dart';
+import './status_view.dart';
+import './calls_view.dart';
+import './chat_view.dart';
+
+class HomeScreen extends StatefulWidget {
+  @override
+  _HomeScreenState createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  final floatingButtonIcons = {
+    1: Icons.chat,
+    2: Icons.camera_alt,
+    3: Icons.add_call,
+  };
+
+  int _currentTab = 1;
+
+  void _setCurrentTab(int index) {
+    setState(() => _currentTab = index);
+  }
+
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -27,7 +46,9 @@ class HomeScreen extends StatelessWidget {
             )
           ],
           bottom: TabBar(
+            onTap: _setCurrentTab,
             isScrollable: true,
+            labelPadding: EdgeInsets.symmetric(horizontal: 14),
             indicatorColor: Colors.white,
             tabs: <Widget>[
               TabItem(icon: Icon(Icons.camera_alt)),
@@ -49,17 +70,51 @@ class HomeScreen extends StatelessWidget {
         body: TabBarView(children: <Widget>[
           Container(),
           ChatView(),
-          Container(),
+          StatusView(),
           CallsView(),
         ]),
-        floatingActionButton: FloatingActionButton(
-          elevation: 4,
-          child: Icon(Icons.chat),
-          backgroundColor: Color.fromRGBO(4, 217, 57, 1),
-          onPressed: () {
-            Navigator.of(context).push(
-                MaterialPageRoute(builder: (context) => ContactsScreen()));
-          },
+        floatingActionButtonLocation: FloatingActionButtonLocation.miniEndFloat,
+        floatingActionButton: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: <Widget>[
+              if (_currentTab == 2)
+                Container(
+                  height: 46,
+                  margin: const EdgeInsets.only(bottom: 14),
+                  child: FloatingActionButton(
+                    heroTag: 'secondaryFB',
+                    backgroundColor: Colors.grey,
+                    elevation: 4,
+                    onPressed: () {},
+                    child: Icon(Icons.edit),
+                  ),
+                ),
+              if (_currentTab == 3)
+                Container(
+                  height: 46,
+                  margin: const EdgeInsets.only(bottom: 14),
+                  child: FloatingActionButton(
+                    heroTag: 'secondaryFB',
+                    backgroundColor: Colors.grey,
+                    elevation: 4,
+                    onPressed: () {},
+                    child: Icon(Icons.videocam),
+                  ),
+                ),
+              FloatingActionButton(
+                heroTag: 'primaryFB',
+                elevation: 4,
+                child: Icon(floatingButtonIcons[_currentTab]),
+                backgroundColor: Color.fromRGBO(4, 217, 57, 1),
+                onPressed: () {
+                  Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => ContactsScreen()));
+                },
+              ),
+            ],
+          ),
         ),
       ),
     );

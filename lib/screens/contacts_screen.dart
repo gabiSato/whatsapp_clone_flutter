@@ -1,12 +1,26 @@
 import 'package:flutter/material.dart';
-import 'package:whatsapp_clone_flutter/contacts_data.dart';
+
+import '../contacts_data.dart';
 
 class ContactsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Contatos'),
+        title: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text('Contatos'),
+            SizedBox(height: 3),
+            Text(
+              '2 contatos',
+              style: TextStyle(
+                fontSize: 14,
+                fontWeight: FontWeight.w400,
+              ),
+            )
+          ],
+        ),
         actions: <Widget>[
           IconButton(
             icon: Icon(Icons.search),
@@ -23,6 +37,7 @@ class ContactsScreen extends StatelessWidget {
         ],
       ),
       body: ListView(
+        padding: const EdgeInsets.symmetric(vertical: 8),
         children: <Widget>[
           ListTile(
             leading: CircleAvatar(
@@ -31,6 +46,7 @@ class ContactsScreen extends StatelessWidget {
                 color: Colors.white,
               ),
               backgroundColor: Color.fromRGBO(4, 217, 57, 1),
+              radius: 22,
             ),
             title: Text(
               'Novo grupo',
@@ -47,6 +63,7 @@ class ContactsScreen extends StatelessWidget {
                 color: Colors.white,
               ),
               backgroundColor: Color.fromRGBO(4, 217, 57, 1),
+              radius: 22,
             ),
             title: Text(
               'Novo contato',
@@ -59,6 +76,7 @@ class ContactsScreen extends StatelessWidget {
           ListTile(
             leading: CircleAvatar(
               backgroundImage: ExactAssetImage(contactsData[0]["image"]),
+              radius: 22,
             ),
             title: Text(
               contactsData[0]["name"],
@@ -77,6 +95,7 @@ class ContactsScreen extends StatelessWidget {
           ListTile(
             leading: CircleAvatar(
               backgroundImage: ExactAssetImage(contactsData[1]["image"]),
+              radius: 22,
             ),
             title: Text(
               contactsData[1]["name"],
@@ -89,6 +108,7 @@ class ContactsScreen extends StatelessWidget {
             subtitle: Text(
               contactsData[1]["status"],
               maxLines: 1,
+              overflow: TextOverflow.ellipsis,
               style: TextStyle(
                 fontSize: 16,
               ),

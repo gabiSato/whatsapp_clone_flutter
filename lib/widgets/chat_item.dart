@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../screens/chat/chat_screen.dart';
+
 class ChatItem extends StatelessWidget {
   const ChatItem(
       {this.imagePath,
@@ -15,6 +17,14 @@ class ChatItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
+      onTap: () {
+        Navigator.of(context).push(MaterialPageRoute(
+          builder: (_) => ChatScreen(
+            imagePath: imagePath,
+            contactName: contactName,
+          ),
+        ));
+      },
       leading: CircleAvatar(
         backgroundImage: ExactAssetImage(imagePath),
         radius: 28,
